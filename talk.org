@@ -1,8 +1,8 @@
-#+TITLE: \(\infty + 1\) and digital music?
-#+BEAMER_HEADER: \subtitle{UQ Maths Enrichment}
+#+TITLE: Cantor tried to solve the heat equation and accidentally invented set theory
+#+BEAMER_HEADER: \subtitle{MQ Lunchtime Seminar}
 #+AUTHOR: Paul Bryan
 #+EMAIL: pabryan@gmail.com
-#+DATE: May 23 2017
+#+DATE: Sep 04 2018
 
 #+SETUPFILE: ~/.emacs.d/org-templates/bibliography.org
 
@@ -81,14 +81,14 @@ u_n(x, t) &= e^{-n^2 t} \sin(n x) &\Rightarrow &\partial_t u_n = \partial_x^2 u_
 
 Let \(u(x, t) = \sum_{n=0}^{\infty} c_n e^{-n^2 t} \sin(n x)\) where \(\sum_{n=0}^{\infty} c_n < \infty\) \pause
 
-#+BEGIN_latex
+#+BEGIN_export latex
 \[
 \begin{split}
 \partial_t u &= \sum_{n=0}^{\infty} \partial_t \left(c_n e^{-n^2 t} \sin(n x)\right) = \sum_{n=0}^{\infty} -n^2 c_n e^{-n^2 t} \sin(n x) \\
 &= \sum_{n=0}^{\infty} \partial_x^2 \left(c_n e^{-n^2 t} \sin(n x)\right) = \partial_x^2 u.
 \end{split}
 \]
-#+END_latex
+#+END_export
 ** Solving by infinite series II
 - Can also use \(\cos\). \pause
 *** Questions
@@ -194,14 +194,14 @@ file:img/square_wave_fourier.png
 - \(F(x) = \int \int f(x) dx = \frac{1}{2} (c_0 + d_0)x^2 - \sum_{n=1}^{\infty} \frac{1}{n^2} (c_n \sin(nx) + d_n \cos(nx))\) \pause
 - Formally \(F''(x) = f(x) = 0\) (\(=0\) by assumption) hence \(F(x) = Ax + B\) \pause
 - But for all but at most finitely many \(x\),
-  #+BEGIN_latex
+  #+BEGIN_export latex
   \[
   \begin{split}
   0 &= f(x) = F(x) - \frac{1}{2} (c_0 + d_0)x^2 + (c_0 + d_0) \\
   &= (B + c_0 + d_0) + Ax - \frac{1}{2} (c_0 + d_0)x^2.
   \end{split}
   \]
-  #+END_latex
+  #+END_export
   \pause
 *** Coefficients Vanish
 - Therefore \(c_0 + d_0 = 0\), \(A = 0\) and \(B = 0\) \pause
