@@ -1,8 +1,8 @@
 #+TITLE: Cantor tried to solve the heat equation and accidentally invented set theory
-#+BEAMER_HEADER: \subtitle{MQ Lunchtime Seminar}
-#+AUTHOR: Paul Bryan
+#+BEAMER_HEADER: \subtitle{MQ Lunchtime Seminar Sep 04 2018, Paul Bryan}
+#+AUTHOR:
 #+EMAIL: pabryan@gmail.com
-#+DATE: Sep 04 2018
+#+DATE:
 
 #+SETUPFILE: ~/.emacs.d/org-templates/bibliography.org
 
@@ -13,6 +13,7 @@
 #+LaTeX_HEADER: \AtBeginSection[]{\begin{frame}\frametitle{Table of Contents}\tableofcontents[currentsection]\end{frame}}
 
 #+LaTeX_HEADER: \input{local_definitions}
+#+LaTeX_HEADER: \titlegraphic{\begin{picture}(0,0)\put(100,75){\makebox(0,0)[rt]{\includegraphics[height=.5\textheight]{img/title_meme.png}}}\end{picture}}
 
 * Fourier, heat conduction and signal processing
 ** Fourier
@@ -73,10 +74,13 @@ file:img/fourier_law.png
 [[file:img/heat_1d.jpg]]
 
 *** 
-\begin{align*}
-u_1(x, t) &= e^{-t} \sin(x) &\Rightarrow &\partial_t u_1 = -e^{t} \sin(x) = \partial_x^2 u_1 \\
-u_n(x, t) &= e^{-n^2 t} \sin(n x) &\Rightarrow &\partial_t u_n = \partial_x^2 u_n.
-\end{align*}
+\[
+u_1(x, t) = e^{-t} \sin(x) \Rightarrow \partial_t u_1 = -e^{-t} \sin(x) = \partial_x^2 u_1
+\]
+\pause
+\[
+u_n(x, t) = e^{-n^2 t} \sin(n x) \Rightarrow \partial_t u_n = \partial_x^2 u_n.
+\]
 \pause
 
 Let \(u(x, t) = \sum_{n=0}^{\infty} c_n e^{-n^2 t} \sin(n x)\) where \(\sum_{n=0}^{\infty} c_n < \infty\) \pause
@@ -135,6 +139,18 @@ Let \(u(x, t) = \sum_{n=0}^{\infty} c_n e^{-n^2 t} \sin(n x)\) where \(\sum_{n=0
 [[file:img/spectral.png]]
 
 * Cantor and Fourier series
+** Paradise?
+
+From the paradise that Cantor created for us, no one can expel use.
+
+- David Hilbert
+
+\pause
+
+I don't know what predominates in Cantor's theory - philosophy or theology, but I am sure there is no mathematics there.
+
+- Leopold Kronecker
+
 ** Cantor
 *** Image
   :PROPERTIES:
@@ -165,9 +181,9 @@ f(x) = \sum c_n \sin(nx) + d_n \cos(nx) = \sum c_n' \sin(nx) + d_n' \cos(nx)
 
 *Then* \(c_n = c_n'\) and \(d_n = d_n'\) for every \(n\). \pause
 *** Suffices by linearity to show
-*If* \(\sum c_n \sin(nx) + d_n \cos(nx) = 0\) for all \(x \in [0, 2\pi]\)
+*If* \(\sum a_n \sin(nx) + b_n \cos(nx) = 0\) for all \(x \in [0, 2\pi]\) with \(a_n = c_n - c_n'\), \(b_n = d_n - d_n'\),
 
-*Then* \(c_n = d_n = 0\) for every \(n\).
+*Then* \(a_n = b_n = 0\) for every \(n\).
 
 ** Uniqueness of Fourier Series (Cantor) I
 *** Cantor
@@ -190,15 +206,15 @@ f(x) = \sum c_n \sin(nx) + d_n \cos(nx) = \sum c_n' \sin(nx) + d_n' \cos(nx)
   \end{cases}
   \]
 file:img/square_wave_fourier.png
-** Uniqueness of Fourier Series (Cantor) I: Proof
+** Uniqueness of Fourier Series (Cantor/Riemannc) I: Proof
 - \(F(x) = \int \int f(x) dx = \frac{1}{2} (c_0 + d_0)x^2 - \sum_{n=1}^{\infty} \frac{1}{n^2} (c_n \sin(nx) + d_n \cos(nx))\) \pause
 - Formally \(F''(x) = f(x) = 0\) (\(=0\) by assumption) hence \(F(x) = Ax + B\) \pause
 - But for all but at most finitely many \(x\),
   #+BEGIN_export latex
   \[
   \begin{split}
-  0 &= f(x) = F(x) - \frac{1}{2} (c_0 + d_0)x^2 + (c_0 + d_0) \\
-  &= (B + c_0 + d_0) + Ax - \frac{1}{2} (c_0 + d_0)x^2.
+  0 &= -f(x) = F(x) - \frac{1}{2} (c_0 + d_0)x^2 - (c_0 + d_0) \\
+  &= (B - c_0 - d_0) + Ax - \frac{1}{2} (c_0 + d_0)x^2.
   \end{split}
   \]
   #+END_export
@@ -207,20 +223,27 @@ file:img/square_wave_fourier.png
 - Therefore \(c_0 + d_0 = 0\), \(A = 0\) and \(B = 0\) \pause
   - Either send \(x \to \infty\) or note polynomials have at most finitely many roots. \pause
 - Further arguments give \(c_n = d_n = 0\) (not difficult but too far from our purpose here)
-** Derived Sets
+* Derived Sets
+** Limit Points
+
 - Let \(X \subseteq \RR\) be a set of real numbers.
 - Limit Points of \(X\):
   \[
   X' = \{y \in X : \forall \epsilon > 0, \left((y - \epsilon, y) \union (y, y + \epsilon)\right) \cap X \ne \emptyset\}.
   \]
   i.e. every interval containing \(y\) contains a point in \(X\), not equal to \(y\) \pause
+- Example: \(X = (0, 1)\). Then \(X' = [0, 1]\). \pause
+- Example: \(X = \{1/n : n = 1, 2, 3, \cdots\}\). Then \(X' = \{0\}\). \pause
+- Example: \(X = \QQ = \{m/n : m = 0, \pm 1, \pm, 2, \cdots, n = \pm 1, \pm 2, \cdots\}\)u1. Then \(\QQ' = \RR\)!
+
+** Derived Sets
 - First derived set: \(X' = \{\) limit points of \(X\}\). \pause
 - Second derived set: \(X'' = (X')'\). \pause
 - \(m\)-th derived set: \(X^{(m)} = (X^{(m-1)})'\). \pause
 *** Example
-- \(A_i = \{\frac{1}{n} + \frac{1}{i} : n > i(i-1), n \in \NN\} \subseteq [\tfrac{1}{i}, \frac{1}{i-1}]\)
+- \(A_i = \{\frac{1}{i} \frac{1}{n} : n > i(i-1), n \in \NN\} \subseteq [\tfrac{1}{i}, \frac{1}{i-1}]\)
 - \(A = \union_{i=2}^{\infty} A_i\)
-- \(A' = \{0\} \union \{\frac{1}{n} : n \geq 2, n \in \NN\}\), \(A'' = \{0\}\), \(A''' = \emptyset\).
+- \(A' = \{0\} \union \{\frac{1}{i} : i \geq 2, i \in \NN\}\), \(A'' = \{0\}\), \(A''' = \emptyset\).
 ** Uniqueness of Fourier Series (Cantor) II
 A set \(X\) is called a /derived set of the \(m\)-th kind/ if \(X^{(m)}\) is a finite set. \pause
 - The set \(A\) on the previous slide is an /infinite/ derived set of the second kind.
@@ -241,13 +264,13 @@ f(x) = \sum c_n \sin(nx) + d_n \cos(nx) = \sum c_n' \sin(nx) + d_n' \cos(nx)
 - Order these points \(x_1 < x_2 < \cdots x_{k-1} < x_k\). \pause
 - Consider \(a, b\) with \(x_i < a < b < x_{i+1}\), i.e. \((a,b) \subsetneq (x_i, x_{i+1})\) \pause
 *** The Proof
-- \((a, b)\) contains at most finitely many points from \(X\) \pause
-  - For otherwise, there we would be a limit point of \(X\) contained in \((a, b)\)! (Heine-Borel Theorem)
+- \([a, b]\) contains at most finitely many points from \(X\) \pause
+  - For otherwise, there we would be a limit point of \(X\) contained in \([a, b]\)! (Heine-Borel Theorem)
 - The previous result applies and \(F\) is linear, once again giving the result. \pause
 - Now proceed by induction:
   - Assume the result is true for \(m\)
   - If \(X\) is a derived set of the \((m+1)\)-th kind, then \(X^{(m+1)}\) is finite.
-  - Apply the same argument to \((X^{(m)})'\)
+  - Apply the same argument to \((X^{(m)})'\).
 * Derived sets and Ordinals
 ** Higher Derived Sets
 *** The first infinite ordinal \(\omega\)
